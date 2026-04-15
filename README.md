@@ -5,7 +5,7 @@ scans if internships can be applied to in 1st year
 ## Run locally
 
 ```bash
-cd /home/runner/work/internship-scanner/internship-scanner
+cd <repository-root>
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

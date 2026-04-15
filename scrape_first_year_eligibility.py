@@ -3,6 +3,7 @@ import argparse
 import asyncio
 import csv
 import re
+import sys
 from pathlib import Path
 from typing import Dict, List
 
@@ -71,7 +72,8 @@ async def process_rows(rows: List[Dict[str, str]], timeout_ms: int, headless: bo
                 try:
                     text = await fetch_page_text(context, link, timeout_ms)
                     row[OUTPUT_COLUMN] = classify_first_year_eligibility(text)
-                except Exception:
+                except Exception as exc:
+                    print(f"Failed to process {link}: {exc}", file=sys.stderr)
                     row[OUTPUT_COLUMN] = "FALSE"
         finally:
             await context.close()
